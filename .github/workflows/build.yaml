@@ -11,9 +11,9 @@ jobs:
   build:
      runs-on: ubuntu-24.04
      env:
-      OIDC_AUDIENCE: 'frogoidc'
-      OIDC_PROVIDER: 'destgithub'
-      PLATFORM_REPO: 'sumfrogbot-npm-virt'
+      OIDC_AUDIENCE: 'cgslearning'
+      OIDC_PROVIDER: 'cgslearning'
+      PLATFORM_REPO: 'cgslearning-arcnpm-virtual'
      steps:
        - name: Checkout
          uses: actions/checkout@v3
@@ -33,25 +33,25 @@ jobs:
          run: jf audit
 
        - name: Set CLI Config
-         run: jf npm-config --global=true --repo-resolve=$PLATFORM_REPO --repo-deploy=$PLATFORM_REPO
+         run: jf npm-config --repo-resolve=$PLATFORM_REPO --repo-deploy=$PLATFORM_REPO
            
        - name: Install Dependencies
-         run: jf npm install --build-name="sumbotnpm" --build-number=${{ github.run_number }}
+         run: jf npm install 
          
        - name: Publish
-         run: jf npm publish --build-name="sumbotnpm" --build-number=${{ github.run_number }}
+         run: jf npm publish 
          
-       - name: Collect Build info details
-         run: |
-          # Collect environment variables for the build
-          jf rt bce sumbotnpm ${{ github.run_number }}
-          # Collect VCS details from git and add them to the build
-          # jf rt build-add-git sumbotnpm ${{ github.run_number }}
+  #     - name: Collect Build info details
+  #       run: |
+  #        # Collect environment variables for the build
+  #        jf rt bce sumbotnpm ${{ github.run_number }}
+  #        # Collect VCS details from git and add them to the build
+  #        # jf rt build-add-git sumbotnpm ${{ github.run_number }}
        
-       - name: Publish build-info to Artifactory
-         run: |
-          jf rt bp sumbotnpm ${{ github.run_number }}
-          
-       - name: Perform build scan
-         run: |   
-          jf bs sumbotnpm ${{ github.run_number }}
+  #     - name: Publish build-info to Artifactory
+  #       run: |
+  #        jf rt bp sumbotnpm ${{ github.run_number }}
+  #        
+  #     - name: Perform build scan
+  #       run: |   
+  #        jf bs sumbotnpm ${{ github.run_number }}
