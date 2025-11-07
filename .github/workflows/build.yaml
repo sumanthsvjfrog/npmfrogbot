@@ -29,11 +29,12 @@ jobs:
            oidc-provider-name: ${{ env.OIDC_PROVIDER }}
            oidc-audience: ${{ env.OIDC_AUDIENCE }}
 
-    #   - name: Run Audit scan for the git workspace
-    #     run: jf audit
-
        - name: Set CLI Config
          run: jf npm-config --repo-resolve=$PLATFORM_REPO --repo-deploy=$PLATFORM_REPO
+
+       - name: Run Audit scan for the git workspace
+         run: jf audit
+
            
        - name: Install Dependencies
          run: jf npm install 
