@@ -19,7 +19,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
 
       # Install prerequisites1
-      - name: Setup python
+      - name: Setup Node
         uses: actions/setup-node@v3
 
 
@@ -42,6 +42,6 @@ jobs:
           # The GitHub token automatically generated for the job
           JF_GIT_TOKEN: ${{ secrets.JF_GITHUB_TOKEN }}
           #JF_WATCHES: "frogbot"
-          JF_PROJECT: "cgslearing"
+          #JF_PROJECT: "cgslearning"
 
           
